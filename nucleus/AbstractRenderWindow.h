@@ -1,6 +1,7 @@
 /*****************************************************************************
  * Alpine Terrain Renderer
  * Copyright (C) 2023 Adam Celarek
+ * Copyright (C) 2024 Patrick Komon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +41,6 @@ namespace camera {
     class Definition;
     class AbstractDepthTester;
 }
-struct Tile;
 
 class AbstractRenderWindow : public QObject {
     Q_OBJECT

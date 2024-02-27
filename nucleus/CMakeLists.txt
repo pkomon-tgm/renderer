@@ -4,6 +4,7 @@
 # Copyright (C) 2024 Lucas Dworschak
 # Copyright (C) 2023 Gerald Kimmersdorfer
 # Copyright (C) 2015 Taylor Braun-Jones (via github.com/nocnokneo/cmake-git-versioning-example)
+# Copyright (C) 2024 Patrick Komon
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -59,7 +60,6 @@ qt_add_library(nucleus STATIC
     event_parameter.h
     Raster.h
     srs.h srs.cpp
-    Tile.cpp Tile.h
     tile_scheduler/utils.h tile_scheduler/utils.cpp
     tile_scheduler/DrawListGenerator.h tile_scheduler/DrawListGenerator.cpp
     tile_scheduler/LayerAssembler.h tile_scheduler/LayerAssembler.cpp

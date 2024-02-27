@@ -1,6 +1,7 @@
 #############################################################################
 # Alpine Terrain Renderer
 # Copyright (C) 2023 Adam Celarek <family name at cg tuwien ac at>
+# Copyright (C) 2024 Patrick Komon
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +28,6 @@ alp_add_unittest(unittests_nucleus
     test_raster.cpp
     test_terrain_mesh_index_generator.cpp
     test_srs.cpp
-    test_tile.cpp
     test_tile_conversion.cpp
     nucleus_tile_scheduler_util.cpp
     nucleus_tile_scheduler_tile_load_service.cpp

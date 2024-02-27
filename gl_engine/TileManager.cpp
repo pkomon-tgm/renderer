@@ -28,6 +28,7 @@
 #include "ShaderProgram.h"
 #include "nucleus/camera/Definition.h"
 #include "nucleus/utils/terrain_mesh_index_generator.h"
+#include "nucleus/Raster.h"
 
 using gl_engine::TileManager;
 using gl_engine::TileSet;
