@@ -29,6 +29,7 @@
 #include "nucleus/tile_scheduler/utils.h"
 #include "nucleus/utils/tile_conversion.h"
 #include "radix/quad_tree.h"
+#include "stb_slim/stb_image_write.h"
 
 using namespace nucleus::tile_scheduler;
 
@@ -334,24 +335,12 @@ Cache<tile_types::TileQuad>& Scheduler::ram_cache()
 
 QByteArray Scheduler::white_jpeg_tile(unsigned int size)
 {
-    QImage default_tile(QSize { int(size), int(size) }, QImage::Format_ARGB32);
-    default_tile.fill(Qt::GlobalColor::white);
-    QByteArray arr;
-    QBuffer buffer(&arr);
-    buffer.open(QIODevice::WriteOnly);
-    default_tile.save(&buffer, "JPEG");
-    return arr;
+    return utils::create_single_color_jpg(size, {255, 255, 255}, 70); //TODO QImage::save was used before, what is default quality?
 }
 
-QByteArray Scheduler::black_png_tile(unsigned size)
+QByteArray Scheduler::black_png_tile(unsigned int size)
 {
-    QImage default_tile(QSize { int(size), int(size) }, QImage::Format_ARGB32);
-    default_tile.fill(Qt::GlobalColor::black);
-    QByteArray arr;
-    QBuffer buffer(&arr);
-    buffer.open(QIODevice::WriteOnly);
-    default_tile.save(&buffer, "PNG");
-    return arr;
+    return utils::create_single_color_png(size, {0, 0, 0, 255});
 }
 
 std::filesystem::path Scheduler::disk_cache_path()

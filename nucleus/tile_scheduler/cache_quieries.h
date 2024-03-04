@@ -24,6 +24,8 @@
 
 #include <QImage>
 
+#include "stb_slim/stb_image.h"
+
 namespace nucleus::tile_scheduler::cache_queries {
 
 inline float query_altitude(MemoryCache* cache, const glm::dvec2& lat_long)
@@ -42,14 +44,23 @@ inline float query_altitude(MemoryCache* cache, const glm::dvec2& lat_long)
         if (srs::tile_bounds(layered_tile.id).contains(world_space)) {
             const auto bounds = srs::tile_bounds(layered_tile.id);
             const auto uv = (world_space - bounds.min) / bounds.size();
-            const auto height_tile = QImage::fromData(*layered_tile.height);
-            assert(!height_tile.isNull());
-            if (height_tile.isNull())
+
+            int width, height;
+            auto data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(layered_tile.height->constData()),
+                                              layered_tile.height->size(), &width, &height, nullptr, 4);
+            assert(data != 0);
+            if (data == 0)
                 return 1000;
-            const auto x = int(uv.x * height_tile.width());
-            const auto y = int((1 - uv.y) * height_tile.height());
-            const auto rgb = QColor(height_tile.pixel(x, y));
-            return radix::height_encoding::to_float({rgb.red(), rgb.green(), rgb.blue()});
+
+            const auto getPixelData = [&data, &width] (int x, int y) -> std::array<uint8_t, 3> {
+                const auto index = 4 * (x + y * width); //4 components per color
+                return {data[index], data[index + 1], data[index + 2]};
+            };
+
+            const auto x = int(uv.x * width);
+            const auto y = int((1 - uv.y) * height);
+            const auto rgb = getPixelData(x, y);
+            return radix::height_encoding::to_float({rgb[0], rgb[1], rgb[2]});
         }
     }
 

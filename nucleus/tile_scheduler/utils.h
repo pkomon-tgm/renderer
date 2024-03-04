@@ -293,5 +293,9 @@ namespace utils {
     {
         return uint64_t(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
     }
+
+    QByteArray create_single_color_jpg(unsigned int size, const std::array<uint8_t, 3>& rgb, int quality);
+    QByteArray create_single_color_png(unsigned int size, const std::array<uint8_t, 4>& rgba);
+
 }
 }
