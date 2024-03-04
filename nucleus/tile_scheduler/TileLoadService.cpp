@@ -19,7 +19,6 @@
 #include "TileLoadService.h"
 
 #include <QDebug>
-#include <QImage>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QtVersionChecks>
